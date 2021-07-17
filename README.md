@@ -26,4 +26,4 @@ array([['p-value', 'k', 'v', 'q', 'n_dps',
        [2.0, 87.0, 77.0, 4.955222201076998, 20.0, 11.0],
        [2.0, 21.0, 97.0, 3.3196438068957, 20.0, 12.0]], dtype=object)
 ```
-
+(p-value is dummy data for fast executation)
