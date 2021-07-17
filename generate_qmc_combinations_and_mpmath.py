@@ -48,8 +48,8 @@ def cdf_mp(q, k, nu, dps):
 halton_qmc = Halton(3, seed=seed)
 
 p_min, p_max = 0, 1
-k_min, k_max = 1, 120
-v_min, v_max = 2, 100
+k_min, k_max = 2, 120
+v_min, v_max = 1, 100
 
 
 t0 = time.time()
