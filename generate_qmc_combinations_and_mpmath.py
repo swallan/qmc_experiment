@@ -16,10 +16,12 @@ from scipy.stats.qmc import scale
 from mpmath import gamma, pi, sqrt, quad, inf, mpf, mp, almosteq
 from mpmath import npdf as phi
 from mpmath import ncdf as Phi
-# from mpmath import equ
 
-temp_arr = [mpf(x) for x in [1.012, 1.014, 1.015, 1.015, 1.024, 1.024, 1.006, 1.006, 1.06, 1.05, 1.06]]
-    
+import time
+
+seed = 3858595610
+header = np.asarray([["p-value", 'k', 'v', 'q', 'n_dps', f'count.. seed:{seed}']], dtype=object)
+np.save("combinations_q.npy", header)    
 
 def cdf_mp(q, k, nu, dps):
     print(f"cdf_mp(q={q}, k={k}, nu={nu}, dps={dps})")
@@ -43,11 +45,14 @@ def cdf_mp(q, k, nu, dps):
                method="gauss-legendre", maxdegree=10)
     return res
 
-halton_qmc = Halton(3, seed=3858595610)
+halton_qmc = Halton(3, seed=seed)
 
 p_min, p_max = 0, 1
-k_min, k_max = 2, 120
-v_min, v_max = 1, 100
+k_min, k_max = 1, 120
+v_min, v_max = 2, 100
+
+
+t0 = time.time()
 
 count = 1
 # qmc + generation will run indefinitely.
@@ -77,7 +82,7 @@ while(True):
         # generate new p_dps_n1
         p_dps_n1 = cdf_mp(q, k, v, dps=n_dps+1)
     print(f"n_dps: {n_dps}, n_dps+1:{n_dps+1}")
-
+    
     print(p_dps_n, p_dps_n1)
     print("match.")
     print("Saving! Do not interrupt.")
@@ -85,6 +90,8 @@ while(True):
     all_previous_concat = np.concatenate((all_previous, [[p_dps_n1, k, v, q, n_dps, count]]))
     np.save("combinations_q.npy", all_previous_concat, allow_pickle=True)
     print("Done saving.")
+    
+    print(f"time elapsed: {time.time() - t0}")
 
     
     

@@ -6,5 +6,5 @@ This package generates two things:
 
 To run:
 
-1. Run the `setup.py` to create the `combinations_q.npy` file with header.
-2. Run `python generate_qmc_combinations_and_mpmath.py`. It will run until you interrupt it. Do not interrupt when it prints that it is saving.
+1. Run `python generate_qmc_combinations_and_mpmath.py`. It will run until you interrupt it. Do not interrupt when it prints that it is saving.
+
