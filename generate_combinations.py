@@ -13,8 +13,8 @@ seed = 3858595610
 halton_qmc = Halton(3, seed=seed)
 
 p_min, p_max = 0, 1
-k_min, k_max = 2, 121
-v_min, v_max = 1, 101
+k_min, k_max = 2, 101
+v_min, v_max = 1, 121
 
 
 pkv_raw = halton_qmc.random(10000)
