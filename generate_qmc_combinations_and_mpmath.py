@@ -63,7 +63,7 @@ while(True):
     p, k, v = all_combinations[count]
     k, v = int(k), int(v)
     q = stats.studentized_range.ppf(p, k, v)
-    print(f"\niteration: {count}")
+    print(f"\niteration: {count} : {( time.time()- t0 )/count:f} seconds per iteration, {((c_upper - c_lower) * ((time.time() - t0)/count)):f} left.")
 
     
     n_dps = 20
