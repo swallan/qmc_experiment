@@ -55,16 +55,22 @@ def cdf_mp(q, k, nu, dps):
 
 
 t0 = time.time()
+total_count = c_upper - c_lower
+
 
 count = c_lower
 # qmc + generation will run indefinitely.
 while(True):
+    
+
 
     p, k, v = all_combinations[count]
     k, v = int(k), int(v)
     q = stats.studentized_range.ppf(p, k, v)
     
-
+    te = (time.time() - t0)/60
+    print(f"time elapsed: {te} minutes")
+    print(f"{(te/count) * (total_count - count)} to go for this instance.")
     
     n_dps = 20
     p_dps_n = cdf_mp(q, k, v, dps=n_dps)
@@ -96,7 +102,8 @@ while(True):
     count=count+1   
     if count == c_upper:
         break
-    print(f"\niteration: {count} : {( time.time()- t0 )/count:f} seconds per iteration, {((c_upper - c_lower) * ((time.time() - t0)/count)):f} left.")
+    
+    # print(f"\niteration: {count} : {( time.time()- t0 )/count:f} seconds per iteration, {((c_upper - c_lower) * ((time.time() - t0)/count)):f} left.")
 
     
     
